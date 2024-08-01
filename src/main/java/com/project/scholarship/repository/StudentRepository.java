@@ -13,6 +13,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByRegistrationNumberAndDob(String registrationNumber, LocalDate dob);
 
     List<Student> findByScholarshipName(String scholarshipName);
+    List<Student> findByDepartment(String department);
+    List<Student> findByScholarshipNameAndDepartment(String scholarshipName, String department);
+
 
     long countByScholarshipNameIsNotNull();
 

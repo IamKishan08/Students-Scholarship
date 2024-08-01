@@ -34,6 +34,15 @@ public class StudentService {
         return studentRepository.findByScholarshipName(scholarshipName);
     }
 
+    public List<Student> findByDepartment(String department) {
+        return studentRepository.findByDepartment(department);
+    }
+
+    public List<Student> findByScholarshipNameAndDepartment(String scholarshipName, String department) {
+        return studentRepository.findByScholarshipNameAndDepartment(scholarshipName, department);
+    }
+
+
     public Student findById(Long id) {
         return studentRepository.findById(id).orElse(null);
     }
@@ -85,6 +94,8 @@ public class StudentService {
     public long countByScheme(String scheme) {
         return studentRepository.countByScheme(scheme);
     }
+
+
 
     public void save(MultipartFile file) {
         try {

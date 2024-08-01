@@ -28,11 +28,18 @@ public class ScholarshipController {
 
     @GetMapping("/scholarships/students")
     @ResponseBody
-    public List<Student> getStudentsByScholarship(@RequestParam(value = "scholarship", required = false) String scholarship) {
-        if (scholarship == null || scholarship.isEmpty()) {
+    public List<Student> getStudentsByScholarshipAndDepartment(
+            @RequestParam(value = "scholarship", required = false) String scholarship,
+            @RequestParam(value = "department", required = false) String department) {
+
+        if ((scholarship == null || scholarship.isEmpty()) && (department == null || department.isEmpty())) {
             return studentService.findAll();
-        } else {
+        } else if (scholarship == null || scholarship.isEmpty()) {
+            return studentService.findByDepartment(department);
+        } else if (department == null || department.isEmpty()) {
             return studentService.findByScholarshipName(scholarship);
+        } else {
+            return studentService.findByScholarshipNameAndDepartment(scholarship, department);
         }
     }
 }
